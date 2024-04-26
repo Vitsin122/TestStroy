@@ -4,6 +4,11 @@ namespace ServerASP.Data.Interfaces
 {
     public interface IEmployeeRepository
     {
-        IEnumerable<Employer> GetAllEmployee();
+        IEnumerable<Employer> SelectAll();
+        Employer? SelectById(int id);
+        void InsertEmployee(Employer employer);
+        void UpdateEmployee(Employer employer);
+        void DeleteEmployee(int id);
+        void Save();
     }
 }

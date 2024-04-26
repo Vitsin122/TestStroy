@@ -8,7 +8,7 @@
         public string? Lastname { get; set; }
         public DateTime? Birthday { get; set; }
         public short PositionId { get; set; }
-        public Position Position { get; set; }
+        public Position? Position { get; set; }
         public int Salary { get; set; }
         public bool isActive { get; set; }
     }
