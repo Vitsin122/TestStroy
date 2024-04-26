@@ -20,6 +20,8 @@ namespace ServerASP.Data.DBContext
         {
             modelBuilder.Entity<Position>().HasKey(x => x.Id);
             modelBuilder.Entity<Position>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+
         }
     }
 }
