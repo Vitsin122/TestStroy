@@ -7,16 +7,17 @@ namespace ServerASP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            //Ну чисто протестить сначала, какой json он выдаёт.
+            //Ну да, можно было бы через юнит тесты и Moq, но я уже соскуфился
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
