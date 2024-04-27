@@ -10,11 +10,11 @@ namespace ServerASP.Data.ModelConfigure
         {
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.HasData(new Position{PositionName = "Программист"}, 
-                new Position{PositionName = "Юрист"}, 
-                new Position{PositionName = "Бухгалтер"},
-                new Position{PositionName = "Менеджер"},
-                new Position{PositionName = "Директор"});
+            builder.HasData(new Position{Id = 1,PositionName = "Программист"}, 
+                new Position{Id = 2, PositionName = "Юрист"}, 
+                new Position{Id=3, PositionName = "Бухгалтер"},
+                new Position{Id=4, PositionName = "Менеджер"},
+                new Position{Id = 5,PositionName = "Директор"});
         }
     }
 }

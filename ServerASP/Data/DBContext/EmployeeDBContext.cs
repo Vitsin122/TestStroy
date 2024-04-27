@@ -1,5 +1,6 @@
 ﻿using ServerASP.Models;
 using Microsoft.EntityFrameworkCore;
+using ServerASP.Data.ModelConfigure;
 
 namespace ServerASP.Data.DBContext
 {
@@ -8,9 +9,11 @@ namespace ServerASP.Data.DBContext
         public DbSet<Employer> Employee { get; set; }
         public DbSet<Position> Position {  get; set; }
 
-        public EmployeeDBContext()
+        public EmployeeDBContext(DbContextOptions<EmployeeDBContext> options)
+            : base(options)
         {
-            
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,10 +21,13 @@ namespace ServerASP.Data.DBContext
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Position>().HasKey(x => x.Id);
-            modelBuilder.Entity<Position>().Property(x => x.Id).ValueGeneratedOnAdd();
-
-
+            modelBuilder.ApplyConfiguration(new PositionConfig());
+            modelBuilder.ApplyConfiguration(new EmployerConfig());
+            //modelBuilder.Entity<Position>().HasData(new Position { Id = 0, PositionName = "Программист" },
+            //    new Position { Id = 1, PositionName = "Юрист" },
+            //    new Position { Id = 2, PositionName = "Бухгалтер" },
+            //    new Position { Id = 3, PositionName = "Менеджер" },
+            //    new Position { Id = 4, PositionName = "Директор" });
         }
     }
 }

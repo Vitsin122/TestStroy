@@ -1,4 +1,5 @@
-﻿using ServerASP.Data.DBContext;
+﻿using Microsoft.EntityFrameworkCore;
+using ServerASP.Data.DBContext;
 using ServerASP.Data.Interfaces;
 using ServerASP.Models;
 
@@ -13,12 +14,15 @@ namespace ServerASP.Data.Repositories
             this.context = context;
         }
 
-        public void DeleteEmployee(int id)
+        public void DeleteEmployee(Employer employer)
         {
-            Employer? employer = context.Employee.Find(id);
+            Employer? currentEmployer = context.Employee.Include(p => p.Position).
+                                        Where(tempEmployer => tempEmployer.Firstname == employer.Firstname && 
+                                                              tempEmployer.Surname == employer.Surname &&
+                                                              tempEmployer!.Position!.PositionName == employer!.Position!.PositionName)?.FirstOrDefault();
 
-            if (employer != null)
-                context.Employee.Remove(employer);
+            if (currentEmployer != null)
+                context.Employee.Remove(currentEmployer);
         }
 
         public void InsertEmployee(Employer employer)
@@ -33,23 +37,13 @@ namespace ServerASP.Data.Repositories
 
         public IEnumerable<Employer> SelectAll() => context.Employee.ToList();
 
-        public Employer? SelectById(int id) => context.Employee.Find(id);
-
+        public Employer? SelectEmployee(Employer employer) => context.Employee.Include(p => p.Position).
+                                                                Where(tempEmployer => tempEmployer.Firstname == employer.Firstname &&
+                                                                                      tempEmployer.Surname == employer.Surname &&
+                                                                                      tempEmployer!.Position!.PositionName == employer!.Position!.PositionName)?.FirstOrDefault();
         public void UpdateEmployee(Employer employer)
         {
-            Employer? currentEmployer = context.Employee.Find(employer.Id);
-
-            if (currentEmployer != null)
-            {
-                currentEmployer.Firstname = employer.Firstname;
-                currentEmployer.Lastname = employer.Lastname;
-                currentEmployer.Surname = employer.Surname;
-                currentEmployer.Birthday = employer.Birthday;
-                currentEmployer.Salary = employer.Salary;
-                currentEmployer.isActive = employer.isActive;
-                currentEmployer.PositionId = employer.PositionId;
-                context.Employee.Update(currentEmployer);
-            }
+            
         }
     }
 }

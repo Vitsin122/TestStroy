@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServerASP.Services.Interfaces;
 
 namespace ServerASP.Controllers
 {
@@ -6,9 +7,16 @@ namespace ServerASP.Controllers
     [Route("api/[controller]")]
     public class PositionController : Controller
     {
-        public PositionController()
+        private IPositionService positionService;
+        public PositionController(IPositionService positionService)
         {
+            this.positionService = positionService;
+        }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(positionService.GetAllPositions());
         }
     }
 }
