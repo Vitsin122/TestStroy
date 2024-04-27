@@ -1,6 +1,6 @@
-﻿namespace ServerASP.Models.DTO
+﻿namespace ServerASP.Models.DTO.Outgoing
 {
-    public class EmployerDTO
+    public class EmployerGetDTO
     {
         public string FirstName { get; set; }
         public string SurName { get; set; }
