@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Data\ModelConfigure\" />
+    <Folder Include="Models\DTO\Incoming\" />
   </ItemGroup>
 
 </Project>
