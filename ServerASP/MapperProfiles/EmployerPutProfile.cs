@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using ServerASP.Models;
-using ServerASP.Models.DTO.Incoming;
+using ServerASP.Models.DTO.Outgoing;
 
 namespace ServerASP.MapperProfiles
 {
-    public class EmployerPostProfile : Profile
+    public class EmployerPutProfile : Profile
     {
-        public EmployerPostProfile()
+        public EmployerPutProfile()
         {
-            CreateMap<EmployeeAddDTO, Employer>()
+            CreateMap<EmployeeForPutDTO, Employer>()
                 .ForMember(
                     dest => dest.isActive,
                     opt => opt.MapFrom(src => src.IsActive)
@@ -35,7 +35,10 @@ namespace ServerASP.MapperProfiles
                 )
                 .ForMember(
                     dest => dest.Position,
-                    opt => opt.MapFrom(src => new Position { PositionName = src.Position })
+                    opt => opt.MapFrom(src => new Position
+                    {
+                        PositionName = src.Position
+                    })
                 )
                 .ForMember(
                     dest => dest.Salary,

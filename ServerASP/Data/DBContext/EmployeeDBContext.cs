@@ -23,11 +23,6 @@ namespace ServerASP.Data.DBContext
         {
             modelBuilder.ApplyConfiguration(new PositionConfig());
             modelBuilder.ApplyConfiguration(new EmployerConfig());
-            //modelBuilder.Entity<Position>().HasData(new Position { Id = 0, PositionName = "Программист" },
-            //    new Position { Id = 1, PositionName = "Юрист" },
-            //    new Position { Id = 2, PositionName = "Бухгалтер" },
-            //    new Position { Id = 3, PositionName = "Менеджер" },
-            //    new Position { Id = 4, PositionName = "Директор" });
         }
     }
 }
