@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServerASP.Models;
 using ServerASP.Services.Interfaces;
 
 namespace ServerASP.Controllers
@@ -14,7 +15,7 @@ namespace ServerASP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetEmployees()
         {
             return Ok(positionService.GetAllPositions());
         }
