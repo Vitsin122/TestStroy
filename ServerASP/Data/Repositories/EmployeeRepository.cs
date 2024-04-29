@@ -32,7 +32,7 @@ namespace ServerASP.Data.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<Employer> SelectAll() => context.Employee.ToList();
+        public IEnumerable<Employer> SelectAll() => context.Employee.Include(p=>p.Position).ToList();
 
         public Employer SelectEmployee(Employer employer) => context.Employee.Include(p => p.Position).
                                                                 Where(tempEmployer => tempEmployer.Firstname == employer.Firstname &&

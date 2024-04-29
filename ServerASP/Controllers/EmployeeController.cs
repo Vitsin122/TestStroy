@@ -21,7 +21,10 @@ namespace ServerASP.Controllers
         [HttpGet("GetEmployees")]
         public IActionResult GetEmployees()
         {
-            return Ok(employeeService.GetAllEmployee());
+            IEnumerable<EmployeeGetDTO> employeeList =
+                mapper.Map<IEnumerable<EmployeeGetDTO>>(employeeService.GetAllEmployee());
+
+            return Ok(employeeList);
         }
 
         [HttpGet("GetEmployee")]
