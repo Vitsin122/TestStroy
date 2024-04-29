@@ -1,5 +1,3 @@
-
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using ServerASP.Data.DBContext;
 using ServerASP.Data.Interfaces;
@@ -16,17 +14,20 @@ namespace ServerASP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<EmployeeDBContext>( opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IPositionService, PositionService>();
-            builder.Services.AddScoped<IPositionRepository, PositionRepository>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddTransient<IPositionService, PositionService>();
+            builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+            builder.Services.AddTransient<IPositionRepository, PositionRepository>();
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddTransient<UnitOfWork>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ServerASP.Data.DBContext;
 using ServerASP.Data.Interfaces;
+using ServerASP.Data.UOF;
 using ServerASP.Models;
 
 namespace ServerASP.Data.Repositories
@@ -16,13 +17,9 @@ namespace ServerASP.Data.Repositories
 
         public void DeleteEmployee(Employer employer)
         {
-            Employer? currentEmployer = context.Employee.Include(p => p.Position).
-                                        Where(tempEmployer => tempEmployer.Firstname == employer.Firstname && 
-                                                              tempEmployer.Surname == employer.Surname &&
-                                                              tempEmployer!.Position!.PositionName == employer!.Position!.PositionName)?.FirstOrDefault();
+            var Employer = context.Employee.Find(employer.Id);
 
-            if (currentEmployer != null)
-                context.Employee.Remove(currentEmployer);
+            context.Employee.Remove(employer);
         }
 
         public void InsertEmployee(Employer employer)
@@ -37,13 +34,18 @@ namespace ServerASP.Data.Repositories
 
         public IEnumerable<Employer> SelectAll() => context.Employee.ToList();
 
-        public Employer? SelectEmployee(Employer employer) => context.Employee.Include(p => p.Position).
+        public Employer SelectEmployee(Employer employer) => context.Employee.Include(p => p.Position).
                                                                 Where(tempEmployer => tempEmployer.Firstname == employer.Firstname &&
                                                                                       tempEmployer.Surname == employer.Surname &&
-                                                                                      tempEmployer!.Position!.PositionName == employer!.Position!.PositionName)?.FirstOrDefault();
+                                                                                      tempEmployer.Position.PositionName == employer.Position.PositionName)!.First();
+
+        public Employer SelectEmployeeById(int employerId)
+        {
+            return context.Employee.Find(employerId);
+        }
         public void UpdateEmployee(Employer employer)
         {
-            
+            context.Entry(employer).State = EntityState.Modified;
         }
     }
 }

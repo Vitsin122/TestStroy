@@ -12,7 +12,7 @@ namespace ServerASP.Data.DBContext
         public EmployeeDBContext(DbContextOptions<EmployeeDBContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
