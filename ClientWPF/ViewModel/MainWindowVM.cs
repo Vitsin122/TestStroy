@@ -16,10 +16,23 @@ namespace ClientWPF.ViewModel
 {
     public class MainWindowVM : INotifyPropertyChanged
     {
-        public ObservableCollection<EmployeeGetDTO> EmployeeList { get; set; } = new();
+        public ObservableCollection<EmployeeGetDTO> EmployeeList { get; set; }
+
+        private EmployeeGetDTO selectedEmployeeDTO;
+
+        public EmployeeGetDTO SelectedEmployeeDTO
+        {
+            get => selectedEmployeeDTO;
+            set
+            {
+                selectedEmployeeDTO = value;
+                OnPropertyChanged("SelectedEmployeeDTO");
+            }
+        }
+        
+
 
         private RelayCommand mainWindowLoad;
-
         public RelayCommand MainWindowLoad
         {
             get
@@ -62,18 +75,8 @@ namespace ClientWPF.ViewModel
             }
         }
 
-        private RelayCommand? checkCommand;
 
-        public RelayCommand CheckCommand
-        {
-            get
-            {
-                return checkCommand ??= new RelayCommand(obj =>
-                {
-                    var b = EmployeeList;
-                });
-            }
-        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
