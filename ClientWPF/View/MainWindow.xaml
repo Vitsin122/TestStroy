@@ -45,7 +45,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="0" Grid.Row="1" Margin="5" BorderThickness="0" Background="Transparent">
+        <Button Grid.Column="0" Grid.Row="1" Margin="5" BorderThickness="0" Background="Transparent" Command="{Binding AddCommand}">
             <Button.ContentTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -59,7 +59,7 @@
         <Button Style="{StaticResource EditAndDelete}" Grid.Column="1" Grid.Row="1" Margin="5" BorderThickness="0" Background="Transparent">
             <Button.ContentTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Background="Transparent" Orientation="Horizontal">
                         <Image Source="../StaticImageResources/editImage.png" Width="18"></Image>
                         <Rectangle Width="10"></Rectangle>
                         <TextBlock FontWeight="Bold">Редактировать</TextBlock>
@@ -77,6 +77,11 @@
                     </StackPanel>
                 </DataTemplate>
             </Button.ContentTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding DeleteCommand}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Button>
     </Grid>
 </Window>

@@ -9,9 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="StaticImageResources\closeImage.png" />
     <None Remove="StaticImageResources\deleteImage.png" />
     <None Remove="StaticImageResources\editImage.png" />
     <None Remove="StaticImageResources\plusImage.png" />
+    <None Remove="StaticImageResources\saveImage.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="StaticImageResources\closeImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="StaticImageResources\editImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -26,6 +31,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="StaticImageResources\deleteImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="StaticImageResources\saveImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

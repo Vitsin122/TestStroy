@@ -7,10 +7,13 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using ClientWPF.APIClients;
 using ClientWPF.Commands;
 using ClientWPF.Model;
+using ClientWPF.View;
 
 namespace ClientWPF.ViewModel
 {
@@ -18,9 +21,9 @@ namespace ClientWPF.ViewModel
     {
         public ObservableCollection<EmployeeGetDTO> EmployeeList { get; set; }
 
-        private EmployeeGetDTO selectedEmployeeDTO;
+        private EmployeeGetDTO? selectedEmployeeDTO;
 
-        public EmployeeGetDTO SelectedEmployeeDTO
+        public EmployeeGetDTO? SelectedEmployeeDTO
         {
             get => selectedEmployeeDTO;
             set
@@ -41,41 +44,59 @@ namespace ClientWPF.ViewModel
 
                 return mainWindowLoad ??= new RelayCommand(obj =>
                 {
-                    using var client = new HttpClient();
-
-                    client.BaseAddress = new Uri("http://localhost:5098/");
-
                     try
                     {
-                        HttpResponseMessage response = client.GetAsync("api/Employee/GetEmployees").Result;
+                        var employeesCollection = EmployeeAPIClient.GetEmployees();
 
-                        if (response.IsSuccessStatusCode)
+                        foreach (var VARIABLE in employeesCollection)
                         {
-                            var a = response.Content.ReadFromJsonAsync(typeof(ObservableCollection<EmployeeGetDTO>)).Result;
-
-
-                            //Я уверен, что можно было сделать в геттере коллекции вызов события INotifyPropertyChanged и
-                            //Полностью заменить всю коллекцию присвоением одной в другую
-                            //Но пока так
-                            foreach (var emploteeDto in (ObservableCollection<EmployeeGetDTO>)a)
-                            {
-                                EmployeeList.Add(emploteeDto);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(response.StatusCode.ToString());
+                            EmployeeList.Add(VARIABLE);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception e)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(e.Message);
                     }
                 });
             }
         }
 
+        private RelayCommand deleteCommand;
 
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ??= new RelayCommand( obj =>
+                {
+                    try
+                    {
+                        EmployeeAPIClient.DeleteEmployee(selectedEmployeeDTO);
+                        EmployeeList.Remove(selectedEmployeeDTO);
+                        selectedEmployeeDTO = null;
+                        MessageBox.Show("Успешно");
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                });
+            }
+        }
+
+        private RelayCommand addCommand;
+
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??= new RelayCommand(obj =>
+                {
+                    var AddWindow = new AddEditWindow();
+                    AddWindow.Show();
+                });
+            }
+        }
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
