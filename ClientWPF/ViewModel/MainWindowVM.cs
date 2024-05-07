@@ -65,7 +65,7 @@ namespace ClientWPF.ViewModel
             {
                 return mainWindowClosed ??= new RelayCommand(obj =>
                 {
-                    Application.Current.Shutdown();
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 });
             }
         }

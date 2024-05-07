@@ -84,7 +84,7 @@ namespace ClientWPF.ViewModel
                         var mainWindow = new MainWindow();
                         mainWindow.Show();
                     }
-                });
+                }, (obj) => CanSave(obj));
             }
         }
 
@@ -121,7 +121,27 @@ namespace ClientWPF.ViewModel
             }
         }
 
+        private RelayCommand? closedCommand;
 
+        public RelayCommand ClosedCommand
+        {
+            get
+            {
+                return closedCommand ??= new RelayCommand(obj =>
+                {
+                    addEditWindow.Close();
+
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+                });
+            }
+        }
+
+        public bool CanSave(object parameter)
+        {
+            return Employer["Firstname"] == String.Empty && Employer["Surname"] == String.Empty &&
+                   Employer["Position"] == String.Empty;
+        }
 
 
 
