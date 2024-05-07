@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\DBContext\" />
     <Folder Include="Data\ModelConfigure\" />
+    <Folder Include="MapperProfiles\" />
   </ItemGroup>
 
 </Project>
