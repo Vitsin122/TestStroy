@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using ClientWPF.APIClients;
 using ClientWPF.Commands;
@@ -61,6 +53,19 @@ namespace ClientWPF.ViewModel
                     {
                         MessageBox.Show(e.Message);
                     }
+                });
+            }
+        }
+
+        private RelayCommand? mainWindowClosed;
+
+        public RelayCommand MainWindowClosed
+        {
+            get
+            {
+                return mainWindowClosed ??= new RelayCommand(obj =>
+                {
+                    Application.Current.Shutdown();
                 });
             }
         }

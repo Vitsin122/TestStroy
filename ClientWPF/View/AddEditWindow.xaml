@@ -32,7 +32,9 @@
                     <Label Style="{StaticResource ForLabel}" Content="Фамилия*" Width="370"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding Employer.Firstname, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="365"></TextBox>
+                    <TextBox Text="{Binding Employer.Firstname, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="365">
+
+                    </TextBox>
                     <Rectangle Width="10"></Rectangle>
                     <TextBox Text="{Binding Employer.Surname, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="365"></TextBox>
                 </StackPanel>
@@ -51,7 +53,7 @@
                     <Label Style="{StaticResource ForLabel}" Content="Зарплата (руб.)*" Width="200"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox ItemsSource="{Binding PositionNames}" SelectedItem="{Binding Employer.Position.PositionName}" Width="300"></ComboBox>
+                    <ComboBox ItemsSource="{Binding PositionNames}" SelectedItem="{Binding Employer.Position.PositionName, ValidatesOnDataErrors=True}" Width="300"></ComboBox>
                     <Rectangle Width="10"></Rectangle>
                     <TextBox Text="{Binding Employer.Salary, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="200"></TextBox>
                     <Rectangle Width="20"></Rectangle>

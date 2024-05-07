@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ClientWPF.Model
 {
     public class Employer : INotifyPropertyChanged, IDataErrorInfo
@@ -25,20 +18,24 @@ namespace ClientWPF.Model
         {
             get
             {
-                string error = null;
+                string error = String.Empty;
                 switch (columnName)
                 {
-                    case "FirstName":
+                    case "Firstname":
                         if (string.IsNullOrWhiteSpace(Firstname))
                             error = "Имя не может быть пустым";
                         break;
-                    case "LastName":
+                    case "Surname":
                         if (string.IsNullOrWhiteSpace(Lastname))
                             error = "Фамилия не может быть пустой";
                         break;
                     case "Salary":
-                        if (Salary <= 0 && Salary is int)
-                            error = "Зарплата должна быть больше нуля";
+                        if (Salary <= 0 || !(Salary is int))
+                            error = "Зарплата должна быть больше нуля и являться числом";
+                        break;
+                    case "Position":
+                        if (string.IsNullOrWhiteSpace(Position.PositionName))
+                            error = "Позиция должна быть заполнена";
                         break;
                 }
                 return error;

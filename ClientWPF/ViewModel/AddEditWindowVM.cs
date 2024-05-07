@@ -82,7 +82,6 @@ namespace ClientWPF.ViewModel
                         addEditWindow.Close();
 
                         var mainWindow = new MainWindow();
-                        MessageBox.Show("aaaaa");
                         mainWindow.Show();
                     }
                 });
@@ -99,7 +98,6 @@ namespace ClientWPF.ViewModel
                     addEditWindow.Close();
 
                     var mainWindow = new MainWindow();
-                    MessageBox.Show("aaaaa");
                     mainWindow.Show();
                 });
             }

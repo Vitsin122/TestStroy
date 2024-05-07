@@ -22,6 +22,9 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding MainWindowLoad}"></i:InvokeCommandAction>
         </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding MainWindowClosed}"></i:InvokeCommandAction>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     
     <Grid>
