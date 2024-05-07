@@ -72,17 +72,11 @@ namespace ClientWPF.ViewModel
                     {
                         EmployeeAPIClient.SaveEmployee(Employer);
                         addEditWindow.Close();
-
-                        var mainWindow = new MainWindow();
-                        mainWindow.Show();
                     }
                     else
                     {
                         EmployeeAPIClient.EditEmployee(Employer);
                         addEditWindow.Close();
-
-                        var mainWindow = new MainWindow();
-                        mainWindow.Show();
                     }
                 }, (obj) => CanSave(obj));
             }
@@ -96,9 +90,6 @@ namespace ClientWPF.ViewModel
                 return exitCommand ??= new RelayCommand(obj =>
                 {
                     addEditWindow.Close();
-
-                    var mainWindow = new MainWindow();
-                    mainWindow.Show();
                 });
             }
         }
@@ -130,9 +121,6 @@ namespace ClientWPF.ViewModel
                 return closedCommand ??= new RelayCommand(obj =>
                 {
                     addEditWindow.Close();
-
-                    var mainWindow = new MainWindow();
-                    mainWindow.Show();
                 });
             }
         }

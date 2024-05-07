@@ -26,7 +26,7 @@ namespace ClientWPF.Model
                             error = "Имя не может быть пустым";
                         break;
                     case "Surname":
-                        if (string.IsNullOrWhiteSpace(Lastname))
+                        if (string.IsNullOrWhiteSpace(Surname))
                             error = "Фамилия не может быть пустой";
                         break;
                     case "Salary":

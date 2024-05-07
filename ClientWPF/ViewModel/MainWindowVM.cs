@@ -117,7 +117,7 @@ namespace ClientWPF.ViewModel
 
                     var editWindow = new AddEditWindow(OperationType.Edit, currentEmployer); 
                     editWindow.Show();
-                    mainWindow.Close();
+                    mainWindow.Hide();
                 });
             }
         }
