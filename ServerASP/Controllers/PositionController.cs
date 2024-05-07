@@ -14,8 +14,8 @@ namespace ServerASP.Controllers
             this.positionService = positionService;
         }
 
-        [HttpGet]
-        public IActionResult GetEmployees()
+        [HttpGet("GetPositions")]
+        public IActionResult GetPositions()
         {
             return Ok(positionService.GetAllPositions());
         }

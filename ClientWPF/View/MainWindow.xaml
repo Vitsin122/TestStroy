@@ -56,7 +56,7 @@
                 </DataTemplate>
             </Button.ContentTemplate>
         </Button>
-        <Button Style="{StaticResource EditAndDelete}" Grid.Column="1" Grid.Row="1" Margin="5" BorderThickness="0" Background="Transparent">
+        <Button Style="{StaticResource EditAndDelete}" Grid.Column="1" Grid.Row="1" Margin="5" BorderThickness="0" Background="Transparent" Command="{Binding EditCommand}">
             <Button.ContentTemplate>
                 <DataTemplate>
                     <StackPanel Background="Transparent" Orientation="Horizontal">

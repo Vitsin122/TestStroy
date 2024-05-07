@@ -34,11 +34,11 @@ namespace ServerASP
 
             //Ну чисто протестить сначала, какой json он выдаёт.
             //Ну да, можно было бы через юнит тесты и Moq, но я уже соскуфился
-            //if (app.Environment.IsDevelopment())
-            //{
-            //    app.UseSwagger();
-            //    app.UseSwaggerUI();
-            //}
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.UseHttpsRedirection();
 

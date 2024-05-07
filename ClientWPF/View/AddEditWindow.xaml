@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:ClientWPF.View"
         mc:Ignorable="d"
         Title="AddEditWindow" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WindowLoadedCommand}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <ResourceDictionary Source="../Resources/Fonts.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -26,18 +32,18 @@
                     <Label Style="{StaticResource ForLabel}" Content="Фамилия*" Width="370"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Style="{StaticResource ForTextBox}" Width="365"></TextBox>
+                    <TextBox Text="{Binding Employer.Firstname, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="365"></TextBox>
                     <Rectangle Width="10"></Rectangle>
-                    <TextBox Style="{StaticResource ForTextBox}" Width="365"></TextBox>
+                    <TextBox Text="{Binding Employer.Surname, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="365"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource ForLabel}" Content="Отчество" Width="500"></Label>
                     <Label Style="{StaticResource ForLabel}" Content="Дата рождения"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Style="{StaticResource ForTextBox}" Width="490"></TextBox>
+                    <TextBox Text="{Binding Employer.Lastname}" Style="{StaticResource ForTextBox}" Width="490"></TextBox>
                     <Rectangle Width="10"></Rectangle>
-                    <DatePicker Width="270"></DatePicker>
+                    <DatePicker SelectedDate="{Binding Employer.Birthday}" Width="270"></DatePicker>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource ForLabel}" Content="Должность*" Width="300"></Label>
@@ -45,16 +51,16 @@
                     <Label Style="{StaticResource ForLabel}" Content="Зарплата (руб.)*" Width="200"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox Width="300"></ComboBox>
+                    <ComboBox ItemsSource="{Binding PositionNames}" SelectedItem="{Binding Employer.Position.PositionName}" Width="300"></ComboBox>
                     <Rectangle Width="10"></Rectangle>
-                    <TextBox Style="{StaticResource ForTextBox}" Width="200"></TextBox>
+                    <TextBox Text="{Binding Employer.Salary, ValidatesOnDataErrors=True}" Style="{StaticResource ForTextBox}" Width="200"></TextBox>
                     <Rectangle Width="20"></Rectangle>
-                    <CheckBox Content="Активен" Height="18" FontWeight="Bold" FontSize="13" ></CheckBox>
+                    <CheckBox IsChecked="{Binding Employer.isActive}" Content="Активен" Height="18" FontWeight="Bold" FontSize="13" ></CheckBox>
                 </StackPanel>
 
             </StackPanel>
         </Border>
-        <Button Style="{StaticResource SaveButton}" Grid.Column="1" Grid.Row="1" Margin="5,5,5,10">
+        <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveButton}" Grid.Column="1" Grid.Row="1" Margin="5,5,5,10">
             <Button.ContentTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -65,7 +71,7 @@
                 </DataTemplate>
             </Button.ContentTemplate>
         </Button>
-        <Button Style="{StaticResource ExitButton}" Grid.Column="2" Grid.Row="1" Margin="5,5,10,10">
+        <Button Command="{Binding ExitCommand}" Style="{StaticResource ExitButton}" Grid.Column="2" Grid.Row="1" Margin="5,5,10,10">
             <Button.ContentTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

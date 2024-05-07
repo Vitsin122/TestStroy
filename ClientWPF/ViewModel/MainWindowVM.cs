@@ -19,10 +19,15 @@ namespace ClientWPF.ViewModel
 {
     public class MainWindowVM : INotifyPropertyChanged
     {
+        private Window mainWindow;
+        public MainWindowVM(Window mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
         public ObservableCollection<EmployeeGetDTO> EmployeeList { get; set; }
 
         private EmployeeGetDTO? selectedEmployeeDTO;
-
         public EmployeeGetDTO? SelectedEmployeeDTO
         {
             get => selectedEmployeeDTO;
@@ -34,8 +39,7 @@ namespace ClientWPF.ViewModel
         }
         
 
-
-        private RelayCommand mainWindowLoad;
+        private RelayCommand? mainWindowLoad;
         public RelayCommand MainWindowLoad
         {
             get
@@ -61,8 +65,7 @@ namespace ClientWPF.ViewModel
             }
         }
 
-        private RelayCommand deleteCommand;
-
+        private RelayCommand? deleteCommand;
         public RelayCommand DeleteCommand
         {
             get
@@ -84,20 +87,35 @@ namespace ClientWPF.ViewModel
             }
         }
 
-        private RelayCommand addCommand;
-
+        private RelayCommand? addCommand;
         public RelayCommand AddCommand
         {
             get
             {
                 return addCommand ??= new RelayCommand(obj =>
                 {
-                    var AddWindow = new AddEditWindow();
+                    var AddWindow = new AddEditWindow(OperationType.Add);
                     AddWindow.Show();
+                    mainWindow.Hide();
                 });
             }
         }
 
+        private RelayCommand? editCommand;
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ??= new RelayCommand(obj =>
+                {
+                    Employer currentEmployer = EmployeeAPIClient.GetEmployee(selectedEmployeeDTO!);
+
+                    var editWindow = new AddEditWindow(OperationType.Edit, currentEmployer); 
+                    editWindow.Show();
+                    mainWindow.Close();
+                });
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

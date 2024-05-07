@@ -17,7 +17,7 @@ namespace ServerASP.Data.DBContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=EmployeeDB;Username=postgres;Password=vitalya122");
+            //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=EmployeeDB;Username=postgres;Password=vitalya122");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

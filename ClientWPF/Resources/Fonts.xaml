@@ -5,14 +5,16 @@
         <Setter Property="FontWeight" Value="DemiBold"/>
     </Style>
     <Style x:Key="ForTextBox" TargetType="TextBox">
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="BorderBrush" Value="LightGray"></Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border CornerRadius="5" BorderThickness="2" BorderBrush="LightGray"></Border>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border CornerRadius="5" BorderThickness="1" BorderBrush="Gray">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
